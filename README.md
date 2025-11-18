@@ -477,12 +477,15 @@ from tensorflow.keras import layers, models, datasets
 import matplotlib.pyplot as plt
 
 def load_data():
+
   (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
   x_train, x_test = x_train / 255.0, x_test / 255.0 # Normalize to [0, 1]
   y_train = tf.keras.utils.to_categorical(y_train, 10) # One-hot encoding
   y_test = tf.keras.utils.to_categorical(y_test, 10)
   return (x_train, y_train), (x_test, y_test)
+  
 def create_model():
+  
   model = models.Sequential()
   model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
   model.add(layers.MaxPooling2D((2, 2)))
@@ -493,14 +496,19 @@ def create_model():
   model.add(layers.Dense(64, activation='relu'))
   model.add(layers.Dense(10, activation='softmax')) # Output layer for 10 classes
   return model
+  
 def compile_model(model):
+
   model.compile(optimizer='adam',
     loss='categorical_crossentropy',
                 metrics=['accuracy'])
+                
 def train_model(model, x_train, y_train, x_test, y_test):
+
   history = model.fit(x_train, y_train, epochs=10,
     validation_data=(x_test, y_test), batch_size=64)
   return history
+  
 def plot_history(history):
   plt.plot(history.history['accuracy'], label='accuracy')
   plt.plot(history.history['val_accuracy'], label='val_accuracy')
@@ -527,6 +535,7 @@ import matplotlib.pyplot as plt
 # Load pre-trained Haar Cascade classifier for face detection
 haarcascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(haarcascade_path)
+
 def detect_faces(uploaded):
     """Detect faces in an image using Haar Cascade."""
     image = cv2.imread(uploaded)
@@ -559,6 +568,7 @@ from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D
 from tensorflow.keras.preprocessing import image
 import matplotlib.pyplot as plt
 image_path = '/content/Dr_ A. P. J.jpeg'
+
 def preprocess_image(path, target_size=(128, 128)):
     # Load the image and resize it
     img = image.load_img(path, target_size=target_size)
