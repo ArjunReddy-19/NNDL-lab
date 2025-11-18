@@ -2,6 +2,7 @@
 ## week=1
 import numpy as np
 class NeuralNetwork:
+
     def __init__(self, input_size, hidden_size, output_size):
 
         self.weights_input_hidden = np.random.randn(input_size, hidden_size)
@@ -43,6 +44,7 @@ print("\nOutput of the neural network for the input data:")
 print(output)
 ## week=2
 import numpy as np
+
 def purelin(z):
     return z
 def sigmoid(z):
@@ -65,6 +67,7 @@ print("Output with ReLU:", output_relu)
 import numpy as np
 
 class NeuralNetwork:
+
     def __init__(self, input_size, hidden_size, output_size, activation_function='sigmoid', loss_function='mse'):
         # Initialize the weights and biases
         self.weights_input_hidden = np.random.randn(input_size, hidden_size)
@@ -172,6 +175,7 @@ print(loss)
 import numpy as np
 
 class NeuralNetwork:
+
     def __init__(self, input_size, hidden_size, output_size, learning_rate=0.01):
         self.weights_input_hidden = np.random.randn(input_size, hidden_size)
         self.bias_hidden = np.zeros((1, hidden_size))
@@ -184,10 +188,12 @@ class NeuralNetwork:
         self.output_input = np.dot(self.hidden_output, self.weights_hidden_output) + self.bias_output
         self.output = self.sigmoid(self.output_input)
         return self.output
+        
   def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
        def sigmoid_derivative(self, x):
         return x * (1 - x)
+        
       def compute_loss(self, y_true, y_pred):
         return np.mean((y_true - y_pred) ** 2)
         def backward(self, X, y_true, y_pred):
@@ -199,11 +205,13 @@ class NeuralNetwork:
         self.bias_output -= self.learning_rate * np.sum(output_delta, axis=0, keepdims=True)
         self.weights_input_hidden -= self.learning_rate * X.T.dot(hidden_delta)
         self.bias_hidden -= self.learning_rate * np.sum(hidden_delta, axis=0, keepdims=True)
+        
      def train(self, X, y_true, epochs=1000):
       for epoch in range(epochs):
          y_pred = self.forward(X)
          loss = self.compute_loss(y_true, y_pred)
          self.backward(X, y_true, y_pred)
+         
         if epoch % 100 == 0:
                 print(f"Epoch {epoch} | Loss: {loss}")
 input_size = 3  # Number of input neurons
@@ -224,6 +232,7 @@ print(y_pred)
 import numpy as np
 
 class NeuralNetwork:
+
     def __init__(self, input_size, hidden_size, output_size, learning_rate=0.1):
 
         self.weights_input_hidden = np.random.randn(input_size, hidden_size)
@@ -323,6 +332,7 @@ print(y_pred)
 import numpy as np
 
 class NeuralNetwork:
+
     def __init__(self, input_size, hidden_size, output_size, learning_rate=0.1):
         # Initialize weights and biases
         self.weights_input_hidden = np.random.randn(input_size, hidden_size)
@@ -461,9 +471,11 @@ y_pred = nn.test(X_input)
 print("\nPredicted output after training:")
 print(y_pred)
 ## week=7
+
 import tensorflow as tf
 from tensorflow.keras import layers, models, datasets
 import matplotlib.pyplot as plt
+
 def load_data():
   (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
   x_train, x_test = x_train / 255.0, x_test / 255.0 # Normalize to [0, 1]
